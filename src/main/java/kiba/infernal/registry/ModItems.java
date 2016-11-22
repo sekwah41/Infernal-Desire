@@ -13,11 +13,7 @@ public class ModItems {
     public static BaseItem itemHellFireChunk;
     public static BaseItem itemInfernalCrystal;
 
-   //MATERIALS
-    public static Item.ToolMaterial CHARRED = EnumHelper.addToolMaterial("CHARRED", 3 , 500 , 4.0F, 1.0F, 5);
-    public static Item.ToolMaterial MOLTEN = EnumHelper.addToolMaterial("MOLTEN", 3 , 1561 , 8.0F, 4.0F, 22);
-    public static Item.ToolMaterial HELLFIRE = EnumHelper.addToolMaterial("HELLFIRE",3,5000,12.0F,5.0F,8);
-    public static Item.ToolMaterial INFERNAL = EnumHelper.addToolMaterial("INFERNAL", 5, 9000, 20.0F, 8.0F,8);
+
 
     //TOOLS & WEAPONS
     public static BasePickaxe charredPickaxe;
@@ -33,10 +29,10 @@ public class ModItems {
         itemInfernalCrystal = new BaseItem("infernal_crystal");
 
         //Pickaxes
-        charredPickaxe = new BasePickaxe("charred_pickaxe",ModItems.CHARRED);
-        moltenPickaxe = new BasePickaxe("molten_pickaxe",ModItems.MOLTEN);
-        hellfirePickaxe = new BasePickaxe("hellfire_pickaxe",ModItems.HELLFIRE);
-        infernalPickaxe = new BasePickaxe("infernal_pickaxe",ModItems.INFERNAL);
+        charredPickaxe = new BasePickaxe("charred_pickaxe",Materials.CHARRED);
+        moltenPickaxe = new BasePickaxe("molten_pickaxe",Materials.MOLTEN);
+        hellfirePickaxe = new BasePickaxe("hellfire_pickaxe",Materials.HELLFIRE);
+        infernalPickaxe = new BasePickaxe("infernal_pickaxe",Materials.INFERNAL);
 
 
     }
