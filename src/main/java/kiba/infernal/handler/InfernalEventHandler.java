@@ -6,6 +6,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -16,33 +17,45 @@ public class InfernalEventHandler {
 
     @SubscribeEvent
     public void onBlockBreakOverworld(BlockEvent.BreakEvent event) {
-        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.charredPickaxe ||
-                (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
-            if (event.getState().getBlock() == Blocks.STONE && random.nextInt(32) == 0)
-                if (event.getPlayer().dimension == 0)
-
+        if (event.getPlayer().dimension == 0)
+            if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.charredPickaxe ||
+                    (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
+                if (event.getState().getBlock() == Blocks.STONE && random.nextInt(32) == 0)
                     event.getWorld().spawnEntityInWorld(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ModItems.itemMoltenRockPiece)));
     }
 
     @SubscribeEvent
     public void onBlockBreakNether(BlockEvent.BreakEvent event) {
-        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.moltenPickaxe ||
-                (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
-            if (event.getState().getBlock() == Blocks.NETHERRACK && random.nextInt(64) == 0)
-                if (event.getPlayer().dimension == -1)
-
+        if (event.getPlayer().dimension == -1)
+            if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.moltenPickaxe ||
+                    (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
+                if (event.getState().getBlock() == Blocks.NETHERRACK && random.nextInt(64) == 0)
                     event.getWorld().spawnEntityInWorld(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ModItems.itemHellFireChunk)));
 
     }
 
     @SubscribeEvent
     public void onBlockBreakEnd(BlockEvent.BreakEvent event) {
-        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.hellfirePickaxe ||
-                (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
-            if (event.getState().getBlock() == Blocks.STONE && random.nextInt(128) == 0)
-                if (event.getPlayer().dimension == 1)
-
+        if (event.getPlayer().dimension == 1)
+            if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.hellfirePickaxe ||
+                    (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
+                if (event.getState().getBlock() == Blocks.STONE && random.nextInt(128) == 0)
                     event.getWorld().spawnEntityInWorld(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ModItems.itemInfernalCrystal)));
+    }
+
+    @SubscribeEvent
+    public void onMoltenPickHarvest(BlockEvent.HarvestDropsEvent event) {
+        ItemStack heldItem = event.getHarvester().inventory.getCurrentItem();
+        if (heldItem != null && heldItem.getItem() == ModItems.moltenPickaxe) {
+            if (event.getState().getBlock() != Blocks.NETHERRACK) {
+                ItemStack smelteditem = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(event.getState().getBlock())).copy();
+                if (smelteditem != null) {
+                    event.getDrops().clear();
+                    event.getDrops().add(smelteditem);
+                }
+            }
+
+        }
     }
 }
 

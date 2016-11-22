@@ -2,6 +2,7 @@ package kiba.infernal.proxy;
 
 import kiba.infernal.handler.InfernalEventHandler;
 import kiba.infernal.registry.ModItems;
+import kiba.infernal.registry.RecipeRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -13,6 +14,8 @@ public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event){
         ModItems.init();
+        RecipeRegistry.register(event);
+
 
 
     }
