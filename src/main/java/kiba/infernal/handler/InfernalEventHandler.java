@@ -16,8 +16,9 @@ public class InfernalEventHandler {
 
     @SubscribeEvent
     public void onBlockBreakOverworld(BlockEvent.BreakEvent event) {
-        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.charredPickaxe)
-            if (event.getState().getBlock() == Blocks.STONE && random.nextInt(10) == 0)
+        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.charredPickaxe ||
+                (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
+            if (event.getState().getBlock() == Blocks.STONE && random.nextInt(32) == 0)
                 if (event.getPlayer().dimension == 0)
 
                     event.getWorld().spawnEntityInWorld(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ModItems.itemMoltenRockPiece)));
@@ -25,8 +26,9 @@ public class InfernalEventHandler {
 
     @SubscribeEvent
     public void onBlockBreakNether(BlockEvent.BreakEvent event) {
-        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.moltenPickaxe)
-            if (event.getState().getBlock() == Blocks.NETHERRACK && random.nextInt(32) == 0)
+        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.moltenPickaxe ||
+                (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
+            if (event.getState().getBlock() == Blocks.NETHERRACK && random.nextInt(64) == 0)
                 if (event.getPlayer().dimension == -1)
 
                     event.getWorld().spawnEntityInWorld(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ModItems.itemHellFireChunk)));
@@ -35,8 +37,9 @@ public class InfernalEventHandler {
 
     @SubscribeEvent
     public void onBlockBreakEnd(BlockEvent.BreakEvent event) {
-        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.hellfirePickaxe)
-            if (event.getState().getBlock() == Blocks.STONE && random.nextInt(64) == 0)
+        if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.hellfirePickaxe ||
+                (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
+            if (event.getState().getBlock() == Blocks.STONE && random.nextInt(128) == 0)
                 if (event.getPlayer().dimension == 1)
 
                     event.getWorld().spawnEntityInWorld(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ModItems.itemInfernalCrystal)));
