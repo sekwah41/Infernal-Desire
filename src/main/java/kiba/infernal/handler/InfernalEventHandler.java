@@ -3,16 +3,21 @@ package kiba.infernal.handler;
 import kiba.infernal.InfernalDamageSources;
 import kiba.infernal.registry.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Random;
 
@@ -43,7 +48,7 @@ public class InfernalEventHandler {
         if (event.getPlayer().dimension == 1)
             if (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.hellfirePickaxe ||
                     (event.getPlayer() != null && event.getPlayer().getHeldItemMainhand() != null && event.getPlayer().getHeldItemMainhand().getItem() == ModItems.infernalPickaxe))
-                if (event.getState().getBlock() == Blocks.STONE && random.nextInt(128) == 0)
+                if (event.getState().getBlock() == Blocks.END_STONE && random.nextInt(128) == 0)
                     event.getWorld().spawnEntityInWorld(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ModItems.itemInfernalCrystal)));
     }
 
@@ -52,8 +57,9 @@ public class InfernalEventHandler {
         ItemStack heldItem = event.getHarvester().inventory.getCurrentItem();
         if (heldItem != null && heldItem.getItem() == ModItems.moltenPickaxe) {
             if (event.getState().getBlock() != Blocks.NETHERRACK) {
-                ItemStack smelteditem = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(event.getState().getBlock())).copy();
+                ItemStack smelteditem = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(event.getState().getBlock()));
                 if (smelteditem != null) {
+                    smelteditem = smelteditem.copy();
                     event.getDrops().clear();
                     event.getDrops().add(smelteditem);
                 }
@@ -62,18 +68,33 @@ public class InfernalEventHandler {
     }
 
     @SubscribeEvent
-    public void onHellFirePickup(EntityItemPickupEvent event){
+    public void onHellFirePickup(EntityItemPickupEvent event) {
 
-        if(event.getItem().getEntityItem().getItem() == ModItems.itemHellFireChunk
-                && !event.getEntityPlayer().inventory.hasItemStack(new ItemStack(ModItems.itemObsidianSkull))){
-            event.getEntityPlayer().attackEntityFrom(InfernalDamageSources.HellFireburnDamage,1.0F);
-            event.setCanceled(true);
+        if (event.getItem().getEntityItem().getItem() == ModItems.itemHellFireChunk
+                && !event.getEntityPlayer().inventory.hasItemStack(new ItemStack(ModItems.itemObsidianSkull))) {
+            event.getEntityPlayer().attackEntityFrom(InfernalDamageSources.HellFireburnDamage, 1.0F);
+        }
+    }
+
+    @SubscribeEvent
+    public void onHellFireTick(TickEvent.PlayerTickEvent event) {
+        if (event.player.inventory.hasItemStack(new ItemStack(ModItems.itemHellFireChunk))
+                && !event.player.inventory.hasItemStack(new ItemStack(ModItems.itemObsidianSkull))) {
+            event.player.setFire(1);
+            event.player.attackEntityFrom(InfernalDamageSources.HellFireburnDamage, 0.5F);
+
+        }
+    }
+   /* @SubscribeEvent
+    public void playerKilledEntity(LivingDropsEvent event){
+        if(event.getEntityLiving().equals(EntityPlayer))
+        if(event.getEntity() instanceof EntityWither){
+            if(random.nextInt(10) == 0)event.getEntityLiving().dropItem(ModItems.itemWitheringShard,1);
 
         }
 
-
-
-    }
+    }*/
 }
+
 
 

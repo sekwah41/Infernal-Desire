@@ -7,11 +7,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModItems {
-    public static BaseItem itemKnowledgeFlame;
     public static ItemMoltenRockPiece itemMoltenRockPiece;
+    public static BaseItem itemKnowledgeFlame;
     public static BaseItem itemHellFireChunk;
     public static BaseItem itemInfernalCrystal;
     public static BaseItem itemObsidianSkull;
+    public static BaseItem itemWitheringShard;
 
 
 
@@ -23,11 +24,12 @@ public class ModItems {
 
 
     public static void init(){
-        itemKnowledgeFlame = new BaseItem("knowledge_flame");
         itemMoltenRockPiece = new ItemMoltenRockPiece();
+        itemKnowledgeFlame = new BaseItem("knowledge_flame");
         itemHellFireChunk = new BaseItem("hellfire_chunk");
         itemInfernalCrystal = new BaseItem("infernal_crystal");
         itemObsidianSkull = new BaseItem("obsidian_skull");
+        itemWitheringShard = new BaseItem("withering_shard");
 
         //Pickaxes
         charredPickaxe = new BasePickaxe("charred_pickaxe",Materials.CHARRED);
@@ -47,5 +49,7 @@ public class ModItems {
         moltenPickaxe.initModel();
         hellfirePickaxe.initModel();
         infernalPickaxe.initModel();
+        itemObsidianSkull.initModel();
+        itemWitheringShard.initModel();
     }
 }
