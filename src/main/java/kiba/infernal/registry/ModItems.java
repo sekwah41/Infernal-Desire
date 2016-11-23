@@ -11,6 +11,7 @@ public class ModItems {
     public static ItemMoltenRockPiece itemMoltenRockPiece;
     public static BaseItem itemHellFireChunk;
     public static BaseItem itemInfernalCrystal;
+    public static BaseItem itemObsidianSkull;
 
 
 
@@ -26,6 +27,7 @@ public class ModItems {
         itemMoltenRockPiece = new ItemMoltenRockPiece();
         itemHellFireChunk = new BaseItem("hellfire_chunk");
         itemInfernalCrystal = new BaseItem("infernal_crystal");
+        itemObsidianSkull = new BaseItem("obsidian_skull");
 
         //Pickaxes
         charredPickaxe = new BasePickaxe("charred_pickaxe",Materials.CHARRED);

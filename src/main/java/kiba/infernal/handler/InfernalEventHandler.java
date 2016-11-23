@@ -1,5 +1,6 @@
 package kiba.infernal.handler;
 
+import kiba.infernal.InfernalDamageSources;
 import kiba.infernal.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -7,6 +8,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -54,8 +58,21 @@ public class InfernalEventHandler {
                     event.getDrops().add(smelteditem);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onHellFirePickup(EntityItemPickupEvent event){
+
+        if(event.getItem().getEntityItem().getItem() == ModItems.itemHellFireChunk
+                && !event.getEntityPlayer().inventory.hasItemStack(new ItemStack(ModItems.itemObsidianSkull))){
+            event.getEntityPlayer().attackEntityFrom(InfernalDamageSources.HellFireburnDamage,1.0F);
+            event.setCanceled(true);
 
         }
+
+
+
     }
 }
 
