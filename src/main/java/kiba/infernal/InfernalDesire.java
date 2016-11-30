@@ -21,6 +21,10 @@ public class InfernalDesire {
 
     @SidedProxy(clientSide = InfernalDesire.CLIENTPROXY,serverSide = InfernalDesire.COMMONPROXY)
     public static CommonProxy proxy;
+    public static String getInfernalLocation(String path){
+        return InfernalDesire.MODID + ":" + path;
+    }
+
 
     @Mod.Instance
     public static InfernalDesire instance = new InfernalDesire();

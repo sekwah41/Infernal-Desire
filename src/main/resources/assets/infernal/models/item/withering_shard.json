@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "infernal:items/knowledge_flame"
+    "layer0": "infernal:items/withering_shard"
   }
 }

@@ -2,9 +2,14 @@ package kiba.infernal.handler;
 
 import kiba.infernal.InfernalDamageSources;
 import kiba.infernal.registry.ModItems;
+import kiba.infernal.weapon.MoltenSword;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -85,16 +90,6 @@ public class InfernalEventHandler {
 
         }
     }
-   /* @SubscribeEvent
-    public void playerKilledEntity(LivingDropsEvent event){
-        if(event.getEntityLiving().equals(EntityPlayer))
-        if(event.getEntity() instanceof EntityWither){
-            if(random.nextInt(10) == 0)event.getEntityLiving().dropItem(ModItems.itemWitheringShard,1);
-
-        }
-
-    }*/
 }
-
 
 
